@@ -3,22 +3,23 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
-
+import { APP_ROUTES } from './app.routes'
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { DirectoryComponent } from './directory/directory.component';
-
-const APP_ROUTES = [
-  { path: 'directory/:ninja', component: DirectoryComponent },
-  { path: '', component: HomeComponent }
-];
-
+import { RouterOutlet } from "@angular/router";
+import { FilterPipe } from './filter.pipe';
+import { LoggingService } from './logging.service';
+import { DataService } from './data.service';
+import { DetailsComponent } from './details/details.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    DirectoryComponent
+    DirectoryComponent,
+    FilterPipe,
+    DetailsComponent,
   ],
   imports: [
     BrowserModule,
@@ -26,7 +27,7 @@ const APP_ROUTES = [
     HttpModule,
     RouterModule.forRoot(APP_ROUTES)
   ],
-  providers: [],
+  providers: [LoggingService, DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
